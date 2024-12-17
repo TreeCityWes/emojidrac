@@ -1,4 +1,5 @@
-Here's a README.md for the project:
+![image](https://github.com/user-attachments/assets/2cb17a88-c292-4655-90be-d9b11e9a02d7)
+
 
 ```markdown:emojidrac/README.md
 # 🧛 Emoji Dracula Terminal Interface
