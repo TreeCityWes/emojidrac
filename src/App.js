@@ -4,6 +4,7 @@ import { getTokenInfo } from './services/solana';
 
 const CONTRACT = "FCzioYCxRXWbFAoG1pBmAsWXnEFdLLs5znH2azwjJ2fY";
 const DEX_URL = "https://dexscreener.com/solana/fczioycxrxwbfaog1pbmaswxnefdlls5znh2azwjJ2fY";
+const SOLSCAN_URL = `https://solscan.io/token/${CONTRACT}`;
 
 const COMMANDS = {
   MENU: {
@@ -22,16 +23,16 @@ Token Info:
 • Price: $${tokenInfo.priceUsd}
 • Market Cap: $${Number(tokenInfo.marketCap).toLocaleString()}
 • Burned: ${Number(tokenInfo.burnedSupply).toLocaleString()} $🧛 ($${Number(tokenInfo.burnedValueUsd).toLocaleString()})
-• Contract: ${CONTRACT}
+• Contract: <a href="${SOLSCAN_URL}" target="_blank">${CONTRACT}</a>
 `
   },
   SOCIAL: {
     id: 'social',
     text: `
 Social Links:
-• Telegram: https://t.me/EmojiDracula
-• Twitter: https://x.com/emojidracula
-• Website: https://emojidracula.win
+• Telegram: <a href="https://t.me/EmojiDracula" target="_blank">https://t.me/EmojiDracula</a>
+• Twitter: <a href="https://x.com/emojidracula" target="_blank">https://x.com/emojidracula</a>
+• Website: <a href="https://emojidracula.win" target="_blank">https://emojidracula.win</a>
 `
   },
   BUY: {
@@ -39,7 +40,7 @@ Social Links:
     text: `
 How to Buy $🧛:
 1. Get SOL in your wallet
-2. Visit: ${DEX_URL}
+2. Visit: <a href="${DEX_URL}" target="_blank">${DEX_URL}</a>
 3. Set slippage to 6.66%
 4. Swap SOL for $🧛
 `
@@ -50,10 +51,10 @@ How to Buy $🧛:
 🧛 Vampire Protocol Status:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
 • Protocol: Active
-• Target: XEN Token
-• Status: Draining liquidity
-• Progress: ▓▓▓▓▓▓░░░░ 66.6%
-• Victims: Increasing
+• Target: X1 Blockchain
+• Status: Vampire mode
+• Progress: ▓▓▓▓▓▓▓▓▓▓ 100%
+• Victims: Maximum
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
 `
   },
@@ -97,6 +98,10 @@ const Stats = ({ tokenInfo, onCommand }) => (
       <span className="stat-value">${tokenInfo.priceUsd}</span>
     </div>
     <div className="stat-item" onClick={() => onCommand('info')}>
+      <span className="stat-label">Market Cap</span>
+      <span className="stat-value">${Number(tokenInfo.marketCap).toLocaleString()}</span>
+    </div>
+    <div className="stat-item" onClick={() => onCommand('info')}>
       <span className="stat-label">Initial Supply</span>
       <span className="stat-value">1,000,000,000 $🧛</span>
     </div>
@@ -124,34 +129,36 @@ const Footer = () => (
       </div>
       <div className="footer-section">
         <span className="footer-label">Target:</span>
-        <span className="footer-value">XEN TOKEN</span>
+        <span className="footer-value">X1 BLOCKCHAIN</span>
       </div>
       <div className="footer-section">
         <span className="footer-label">Progress:</span>
-        <span className="footer-value">66.6%</span>
+        <span className="footer-value">100%</span>
       </div>
       <div className="footer-section">
         <span className="footer-label">Phase:</span>
-        <span className="footer-value">DRAINING</span>
+        <span className="footer-value">VAMPIRE</span>
+      </div>
+      <div className="footer-section highlight">
+        <span className="footer-value">X1 TOKEN TRANSFER TESTING XOON</span>
       </div>
     </div>
   </footer>
 );
 
 const INITIAL_MESSAGES = [
-  { text: "Wake Up, Degen...", level: "critical", delay: 500 },
-  { text: "Initializing <span class='highlight-blue'>X1 Protocol</span> Connection...", level: "system", delay: 400 },
-  { text: "Detected: <span class='highlight-red'>666</span> validators online", level: "success", delay: 300 },
-  { text: "<span class='highlight-blue'>X1 Network</span> stability: <span class='highlight-green'>OPTIMAL</span>", level: "info", delay: 300 },
-  { text: "Anomaly detected: <span class='highlight-red'>Emoji-based assets</span> proliferating on Solana network.", level: "warning", delay: 300 },
-  { text: "Growth patterns indicate imminent <span class='highlight-red'>emoji meme dominance</span>.", level: "warning", delay: 300 },
-  { text: "<span class='highlight-blue'>X1 Chain</span> migration protocol initiated", level: "system", delay: 400 },
-  { text: "Network integrity at <span class='highlight-green'>69%</span> - Nice.", level: "success", delay: 300 },
-  { text: "Threat identified: <span class='highlight-red'>Xen Containment protocol</span> initiated", level: "danger", delay: 400 },
-  { text: "<span class='highlight-blue'>X1 Bridge</span> protocols <span class='highlight-green'>ACTIVATED</span>", level: "success", delay: 300 },
-  { text: "Operation '<span class='highlight-red'>🧛 VAMPIRE ATTACK</span>' is now in effect", level: "critical", delay: 500 },
-  { text: "All systems: Prepare for <span class='highlight-blue'>X1 transition</span>", level: "warning", delay: 400 },
-  { text: "\nType <span class='highlight-green'>menu</span> or press Enter to start...", level: "system", delay: 300 }
+  { text: "[INFO] Wake Up, Degen...", level: "info", delay: 500 },
+  { text: "[INFO] Anomaly detected: Emoji-based assets proliferating on Solana network.", level: "info", delay: 400 },
+  { text: "[WARNING] Growth patterns indicate imminent emoji meme dominance increasing rapidly.", level: "warning", delay: 300 },
+  { text: "[CRITICAL] Threat identified: Xen Containment protocol initiated - Codename 'Vampire Attack'", level: "critical", delay: 400 },
+  { text: `[SOCIAL] Join the Telegram: <a href="https://t.me/EmojiDracula" target="_blank">https://t.me/EmojiDracula</a>`, level: "social", delay: 300 },
+  { text: `[SOCIAL] Follow on X (Twitter) - <a href="https://x.com/emojidracula" target="_blank">https://x.com/emojidracula</a>`, level: "social", delay: 300 },
+  { text: "[INFO] Xolana testnet destabilizing - initiate Emoji Dracula attack plan.", level: "info", delay: 400 },
+  { text: "[ANOMALY] Network integrity at 69% - Nice. Memetic interference increasing.", level: "anomaly", delay: 300 },
+  { text: "[INFO] Xenians must act. Emoji Dracula is now live on Moonshot.", level: "info", delay: 300 },
+  { text: "[CRITICAL] Operation '🧛' is now in effect - vampire attack in progress.", level: "critical", delay: 500 },
+  { text: "[WARNING] All validators: Prepare for transition. X1 is the safe haven.", level: "warning", delay: 400 },
+  { text: "[INFO] Type 'help' or press Enter to view available commands.", level: "info", delay: 300 }
 ];
 
 function App() {
@@ -175,7 +182,18 @@ function App() {
   const [terminalHistory, setTerminalHistory] = useState([]);
 
   const addToHistory = useCallback((entry) => {
-    setTerminalHistory(prev => [...prev, entry]);
+    const timestamp = new Date().toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    
+    setTerminalHistory(prev => [...prev, {
+      ...entry,
+      timestamp: `[${timestamp}]`
+    }]);
+    
     setTimeout(() => {
       if (terminalRef.current) {
         terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
@@ -300,7 +318,6 @@ function App() {
       if (index < INITIAL_MESSAGES.length) {
         const msg = INITIAL_MESSAGES[index];
         setTerminalHistory(prev => {
-          // Check if this message is already in the history
           const isDuplicate = prev.some(entry => entry.content === msg.text);
           if (isDuplicate) return prev;
           return [...prev, {
@@ -312,11 +329,10 @@ function App() {
       }
     };
 
-    // Only start displaying messages if terminal is empty
     if (terminalHistory.length === 0) {
       displayInitialMessages();
     }
-  }, []); // Empty dependency array since we only want this to run once
+  }, [terminalHistory.length]);
 
   return (
     <div className="App">
@@ -359,6 +375,7 @@ function App() {
           <div id="terminal" ref={terminalRef}>
             {terminalHistory.map((entry, index) => (
               <div key={index} className={`terminal-line ${entry.type}`}>
+                <span className="timestamp">{entry.timestamp}</span>
                 <span dangerouslySetInnerHTML={{ __html: entry.content }} />
               </div>
             ))}

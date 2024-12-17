@@ -158,15 +158,16 @@ body, html {
 
 #command-input {
     background-color: rgba(10, 5, 5, 0.95);
-    border: none;
+    border: 1px solid #4a0000;
     border-top: 2px solid #ff4444;
     color: #ffd700;
     font-family: 'JetBrains Mono', monospace;
     font-size: 14px;
-    padding: 15px 20px;
+    padding: 8px 12px;
     width: 100%;
     outline: none;
-    height: 120px;
+    height: 36px;
+    line-height: 20px;
 }
 
 #command-input:focus {
@@ -175,73 +176,90 @@ body, html {
 }
 
 /* Mobile Styles */
-#mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--terminal-text);
-    font-size: 24px;
-    cursor: pointer;
-    padding: 8px;
-    transition: all 0.3s ease;
-}
-
-.mobile-menu {
-    display: none;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background-color: var(--header-bg);
-    padding: 20px;
-    border-bottom: 1px solid #4a0000;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 999;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-}
-
-.mobile-menu.active {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
-}
-
 @media screen and (max-width: 768px) {
-    .nav-menu {
-        display: none;
+    body {
+        min-height: 100vh;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
     }
-    
-    #mobile-menu-btn {
-        display: block;
+
+    .main-container {
+        padding: 60px 15px 150px;
+        min-height: 100vh;
+        overflow-y: visible;
     }
-    
-    #header {
-        padding: 10px 20px;
-    }
-    
-    .brand {
-        font-size: 1.2em;
-    }
-    
-    .brand img {
-        height: 24px;
-    }
-    
+
+    /* Terminal container */
     #terminal-container {
-        height: 40vh;
+        height: 60vh;
+        min-height: 300px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
     }
-    
-    .stats-grid {
+
+    #terminal {
+        flex: 1;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 10px;
+    }
+
+    /* Footer adjustments for mobile */
+    .terminal-footer {
+        position: relative;
+        margin-top: 20px;
+        margin-bottom: 50px;
+        padding: 10px;
+    }
+
+    /* Special callout styling for mobile */
+    .footer-section.highlight {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        margin: 0 0 10px 0;
+        padding: 8px;
+        background: rgba(74, 0, 0, 0.5);
+        border: 1px solid #ff4444;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    .footer-section.highlight .footer-value {
+        font-size: 0.9em;
+        color: #ffd700;
+    }
+
+    /* Ensure proper spacing */
+    .stats-panel {
+        margin-bottom: 15px;
+    }
+
+    /* Ensure the page is scrollable */
+    #root, .App {
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+}
+
+/* Very small screens */
+@media screen and (max-width: 380px) {
+    .stats-banner {
         grid-template-columns: 1fr;
     }
-    
-    #command-input {
-        height: 80px;
+
+    .stats-banner .stat-item {
+        min-height: 70px;
     }
-} 
+
+    #terminal {
+        font-size: 13px;
+    }
+}
 
 .stats-dashboard {
     background: var(--terminal-bg);
@@ -433,75 +451,70 @@ body, html {
 } 
 
 .terminal-line {
-    margin: 4px 0;
+    margin: 2px 0;
     white-space: pre-wrap;
     font-family: 'JetBrains Mono', monospace;
     opacity: 0;
     animation: fadeIn 0.3s ease forwards;
+    line-height: 1.4;
+    padding: 2px 0;
+    display: flex;
+    align-items: flex-start;
 }
 
-.terminal-line.command {
-    color: #ff4444;
-    padding-left: 0;
-    text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+.terminal-line .timestamp {
+    color: #666;
+    margin-right: 8px;
+    flex-shrink: 0;
 }
 
-.terminal-line.response {
-    color: #ffd700;
-    padding-left: 4px;
+.terminal-line span:last-child {
+    flex: 1;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
-.terminal-line.system {
-    color: #00ffff;
-    padding-left: 4px;
-    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-}
-
-.terminal-line.error {
-    color: #ff0000;
-    padding-left: 4px;
-    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-}
-
-.terminal-line.success {
+.terminal-line.info {
     color: #00ff00;
-    padding-left: 4px;
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
 }
 
 .terminal-line.warning {
     color: #ffd700;
-    padding-left: 4px;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
 }
 
-.terminal-line.info {
-    color: #00ffff;
-    padding-left: 4px;
-    text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-}
-
-.terminal-line.critical { 
+.terminal-line.critical {
     color: #ff4444;
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     font-weight: bold;
 }
 
-.terminal-line.danger { 
-    color: #ff0000;
-    text-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+.terminal-line.social {
+    color: #00ff00;
 }
 
-.terminal-line pre {
-    margin: 0;
-    font-family: inherit;
+.terminal-line.anomaly {
+    color: #ffd700;
+}
+
+/* Style for links in social messages */
+.terminal-line.social a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.4);
+    transition: all 0.3s ease;
+    padding-bottom: 1px;
+}
+
+.terminal-line.social a:hover {
+    border-bottom-color: currentColor;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 #command-input {
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgba(10, 5, 5, 0.95);
     border: none;
     border-top: 2px solid #ff4444;
-    color: #ff4444;
+    color: #ffd700;
     font-family: 'JetBrains Mono', monospace;
     font-size: 14px;
     padding: 15px 20px;
@@ -510,7 +523,7 @@ body, html {
 }
 
 #command-input::placeholder {
-    color: rgba(255, 68, 68, 0.4);
+    color: rgba(255, 215, 0, 0.4);
 }
 
 #terminal::-webkit-scrollbar {
@@ -544,15 +557,15 @@ body, html {
 .main-container {
     display: flex;
     gap: 20px;
-    padding: 80px 20px 20px;
+    padding: 80px 20px 0;
     max-width: 1400px;
     margin: 0 auto;
     height: calc(100vh - 140px);
 }
 
 .stats-panel {
-    width: 350px;
-    min-width: 350px;
+    width: 300px;
+    min-width: 300px;
     background: rgba(10, 5, 5, 0.95);
     border: 1px solid #4a0000;
     border-radius: 8px;
@@ -616,20 +629,21 @@ body, html {
 
 #terminal-container {
     flex: 1;
-    max-width: none;
-    margin: 0;
-    height: 600px;
+    height: 100%;
+    margin-bottom: 0;
 }
 
 /* Update mobile styles */
 @media screen and (max-width: 1024px) {
     .main-container {
         flex-direction: column;
-        padding: 80px 10px 80px;
+        padding: 80px 10px 0;
+        height: calc(100vh - 140px);
     }
 
     .stats-panel {
         width: 100%;
+        height: auto;
         margin-bottom: 20px;
     }
 
@@ -638,39 +652,43 @@ body, html {
     }
 }
 
-/* Footer styling */
+/* Update Footer styling */
 .terminal-footer {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    height: 40px;
     background: rgba(10, 5, 5, 0.95);
     border-top: 1px solid #4a0000;
-    height: 60px;
-    display: flex;
-    align-items: center;
     z-index: 1000;
 }
 
 .footer-content {
-    max-width: 1400px;
+    max-width: 1200px;
     width: 100%;
+    height: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    gap: 40px;
     padding: 0 20px;
+    position: relative;
 }
 
 .footer-section {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    min-width: 200px;
+    justify-content: center;
+    white-space: nowrap;
 }
 
 .footer-label {
-    color: #ff4444;
-    font-size: 0.9em;
+    color: #666;
+    font-size: 0.85em;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -678,39 +696,45 @@ body, html {
 .footer-value {
     color: #ffd700;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+    font-family: 'JetBrains Mono', monospace;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 .footer-value.active {
     color: #00ff00;
-    animation: pulse 2s infinite;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
-@keyframes pulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-}
+/* Update specific footer values */
+.footer-section:nth-child(1) .footer-value { color: #00ff00; }
+.footer-section:nth-child(2) .footer-value { color: #ffd700; }
+.footer-section:nth-child(3) .footer-value { color: #ffd700; }
+.footer-section:nth-child(4) .footer-value { color: #ff4444; }
 
-/* Update container styles to account for footer */
+/* Update container spacing */
 .main-container {
-    padding-bottom: 60px; /* Add space for footer */
+    padding-bottom: 40px;
 }
 
 /* Update mobile styles */
 @media screen and (max-width: 768px) {
     .footer-content {
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 15px;
+        padding: 10px;
     }
 
     .footer-section {
         width: calc(50% - 10px);
-        justify-content: center;
+        min-width: unset;
+    }
+
+    .terminal-footer {
+        height: auto;
     }
 
     .main-container {
-        padding-bottom: 100px; /* More space for wrapped footer */
+        padding-bottom: 80px;
     }
 }
 
@@ -748,7 +772,7 @@ body, html {
 
 /* Validator-style terminal colors */
 .terminal-line.system {
-    color: #ffd700; /* Keep system messages yellow */
+    color: #ffd700;
 }
 
 .highlight-red {
@@ -757,8 +781,8 @@ body, html {
 }
 
 .highlight-blue {
-    color: #00ffff;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 .highlight-green {
@@ -768,7 +792,570 @@ body, html {
 
 /* Make price box stand out */
 .stats-banner .stat-item:first-child .stat-value {
-    color: #00ff00; /* Green for price */
+    color: #00ff00;
     font-size: 1.6em;
     text-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+/* Update link styles for all terminal links */
+.terminal-line a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    padding-bottom: 1px;
+}
+
+.terminal-line a:hover {
+    border-bottom-color: currentColor;
+    text-shadow: 0 0 10px currentColor;
+}
+
+/* Specific styles for contract links */
+.terminal-line a[href*="solscan.io"],
+.terminal-line a[href*="dexscreener.com"] {
+    font-family: 'JetBrains Mono', monospace;
+    border-bottom-style: dashed;
+}
+
+/* Mobile-first media queries */
+@media screen and (max-width: 768px) {
+    /* Container adjustments */
+    .main-container {
+        flex-direction: column;
+        padding: 60px 10px 80px;
+        height: auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Stats panel mobile styling */
+    .stats-panel {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        height: auto;
+        padding: 10px;
+    }
+
+    .stats-banner {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0;
+        height: auto;
+    }
+
+    .stats-banner .stat-item {
+        height: auto;
+        min-height: 80px;
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .stats-banner .stat-value {
+        font-size: 1rem;
+    }
+
+    /* Terminal container mobile styling */
+    #terminal-container {
+        height: 60vh;
+        max-height: 500px;
+        width: 100%;
+        margin: 10px 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #terminal {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 10px;
+    }
+
+    #terminal-header {
+        padding: 8px;
+        font-size: 0.8em;
+        text-align: center;
+    }
+
+    /* Command input mobile styling */
+    #command-input {
+        height: 36px;
+        padding: 8px;
+        font-size: 14px;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    /* Footer mobile styling */
+    .terminal-footer {
+        position: relative;
+        bottom: auto;
+        margin-top: 20px;
+        background: rgba(10, 5, 5, 0.95);
+        border: 1px solid #4a0000;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .footer-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4px;
+        gap: 2px;
+    }
+
+    .footer-label {
+        color: #666;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .footer-value {
+        font-size: 12px;
+        font-weight: 500;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Adjust main container since footer is no longer fixed */
+    .main-container {
+        padding-bottom: 20px;
+    }
+
+    /* Keep the same color scheme but adjust sizing */
+    .footer-section:nth-child(1) .footer-value { 
+        color: #00ff00;
+        font-size: 12px;
+    }
+    .footer-section:nth-child(2) .footer-value { 
+        color: #ffd700;
+        font-size: 12px;
+    }
+    .footer-section:nth-child(3) .footer-value { 
+        color: #ffd700;
+        font-size: 12px;
+    }
+    .footer-section:nth-child(4) .footer-value { 
+        color: #ff4444;
+        font-size: 12px;
+    }
+
+    /* Header mobile styling */
+    #header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 10px;
+    }
+
+    .brand {
+        font-size: 1.1em;
+    }
+
+    .brand img {
+        height: 24px;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    #mobile-menu-btn {
+        display: block;
+    }
+
+    /* Mobile menu styling */
+    .mobile-menu {
+        position: fixed;
+        top: 50px;
+        width: 100%;
+        background: rgba(10, 5, 5, 0.95);
+        padding: 10px;
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 999;
+    }
+
+    .mobile-menu.active {
+        display: flex;
+    }
+
+    .mobile-menu a {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #4a0000;
+        border-radius: 4px;
+        color: #ffd700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+        background: rgba(74, 0, 0, 0.2);
+        color: #ff4444;
+    }
+}
+
+/* Very small screens */
+@media screen and (max-width: 380px) {
+    .stats-banner {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-section {
+        font-size: 0.75em;
+    }
+
+    #terminal-header {
+        font-size: 0.7em;
+    }
+}
+
+/* Ensure desktop styles remain intact */
+@media screen and (min-width: 769px) {
+    .mobile-menu, #mobile-menu-btn {
+        display: none;
+    }
+
+    .nav-menu {
+        display: flex;
+    }
+}
+
+/* Terminal text styling */
+.terminal-line {
+    margin: 2px 0;
+    white-space: pre-wrap;
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+    line-height: 1.4;
+    padding: 2px 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.terminal-line .timestamp {
+    color: #666;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.terminal-line span:last-child {
+    flex: 1;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Ensure proper padding in terminal */
+#terminal {
+    padding: 10px 15px;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .terminal-line {
+        font-size: 0.9em;
+    }
+    
+    .terminal-line .timestamp {
+        font-size: 0.85em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Remove the initial supply hiding */
+    .stats-banner .stat-item:nth-child(2) {
+        display: flex; /* Ensure it's visible */
+    }
+
+    /* Make stats banner 2x3 grid */
+    .stats-banner {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0;
+        height: auto;
+    }
+
+    /* Ensure stats fill space properly */
+    .stats-banner .stat-item {
+        height: auto;
+        min-height: 80px;
+        margin: 0;
+        padding: 10px;
+        width: 100%;
+    }
+
+    /* Adjust font sizes for better fit */
+    .stats-banner .stat-value {
+        font-size: 0.9rem;
+    }
+
+    .stats-banner .stat-label {
+        font-size: 0.75em;
+    }
+}
+
+/* Very small screens */
+@media screen and (max-width: 380px) {
+    .stats-banner {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile terminal text adjustments */
+@media screen and (max-width: 768px) {
+    .terminal-line {
+        font-size: 0.9em;
+        padding: 2px 0;
+        text-align: left;
+        justify-content: flex-start;
+    }
+    
+    .terminal-line .timestamp {
+        font-size: 0.85em;
+    }
+
+    /* Ensure command responses are left aligned */
+    .terminal-line span:last-child {
+        text-align: left;
+        padding-left: 0;
+    }
+
+    /* Specific alignment for command menus */
+    .terminal-line pre,
+    .terminal-line code {
+        text-align: left;
+        margin: 0;
+        padding: 0;
+        white-space: pre-wrap;
+    }
+}
+
+/* Mobile menu button styling */
+#mobile-menu-btn {
+    display: none; /* Hidden by default, shown in mobile */
+    background: rgba(74, 0, 0, 0.3);
+    border: 1px solid #ff4444;
+    color: #ffd700;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1001;
+    transition: all 0.3s ease;
+}
+
+#mobile-menu-btn:hover {
+    background: rgba(74, 0, 0, 0.5);
+    color: #ff4444;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    body {
+        min-height: 100vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .main-container {
+        padding-bottom: 100px; /* Increased padding to ensure scrollability */
+        min-height: 100vh;
+    }
+
+    #terminal-container {
+        height: 60vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #terminal {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 10px;
+        margin-bottom: 10px; /* Add space before command input */
+    }
+
+    #mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Show menu button */
+    #mobile-menu-btn {
+        display: flex;
+    }
+
+    /* Ensure content is scrollable */
+    .stats-panel {
+        margin-bottom: 20px;
+    }
+}
+
+.footer-section.highlight .footer-value {
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Adjust grid for 5 items on mobile */
+@media screen and (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-section.highlight {
+        grid-column: span 2;
+        margin-top: 5px;
+    }
+}
+
+/* Footer styling updates */
+.footer-content {
+    max-width: 1200px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 0 20px;
+    position: relative;
+}
+
+.footer-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 200px;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+/* Special callout styling */
+.footer-section.highlight {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(74, 0, 0, 0.5);
+    border: 1px solid #ff4444;
+    border-radius: 4px;
+    padding: 6px 25px;
+    min-width: 250px;
+    text-align: center;
+}
+
+.footer-section.highlight .footer-value {
+    color: #ffd700;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    letter-spacing: 0.5px;
+}
+
+/* Adjust main container to account for callout */
+.main-container {
+    padding-bottom: 60px;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .footer-section.highlight {
+        position: relative;
+        top: 0;
+        transform: none;
+        left: auto;
+        width: 100%;
+        margin: 5px 0;
+        padding: 8px;
+    }
+
+    .footer-section.highlight .footer-value {
+        font-size: 0.85em;
+    }
+}
+
+/* Mobile footer adjustments */
+@media screen and (max-width: 768px) {
+    .main-container {
+        padding: 60px 15px 20px;
+    }
+
+    .terminal-footer {
+        position: relative;
+        margin-top: 20px;
+        background: rgba(10, 5, 5, 0.95);
+        border: 1px solid #4a0000;
+        border-radius: 4px;
+        padding: 8px 4px;
+        margin-bottom: 150px; /* Add padding below footer */
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+        padding: 0;
+    }
+
+    /* Special callout positioning for mobile */
+    .footer-section.highlight {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        margin: 0 0 10px 0;
+        padding: 6px;
+        background: rgba(74, 0, 0, 0.5);
+        border: 1px solid #ff4444;
+        border-radius: 4px;
+        grid-column: span 2;
+        order: -1;
+    }
+
+    /* Ensure scrollable area extends past footer */
+    body, html {
+        min-height: 100%;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .App {
+        min-height: 100vh;
+        padding-bottom: 100px; /* Additional padding at very bottom */
+    }
 }

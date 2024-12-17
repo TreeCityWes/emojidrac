@@ -1,5 +1,3 @@
-import { Connection, PublicKey } from '@solana/web3.js';
-
 const INITIAL_SUPPLY = 1_000_000_000;
 
 export async function getTokenInfo(tokenAddress) {
