@@ -1,31 +1,98 @@
-# Create React App
+Here's a README.md for the project:
 
-This directory is a brief example of a [Create React App](https://github.com/facebook/create-react-app) site that can be deployed to Vercel with zero configuration.
+```markdown:emojidrac/README.md
+# 🧛 Emoji Dracula Terminal Interface
 
-## Deploy Your Own
+A stylized terminal interface for the Emoji Dracula project on Solana blockchain.
 
-Deploy your own Create React App project with Vercel.
+## Overview
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app&template=create-react-app)
+Emoji Dracula Terminal Interface is a React-based web application that provides a retro terminal-style interface for interacting with the Emoji Dracula token on Solana. The interface features real-time token statistics, interactive commands, and a vampire-themed design.
 
-_Live Example: https://create-react-template.vercel.app/_
+## Features
 
-## Available Scripts
+- 🖥️ Retro terminal interface
+- 📊 Real-time token statistics
+- 💻 Interactive command system
+- 🌗 Dark mode design
+- 📱 Responsive mobile layout
+- 🔄 Live data updates
+- 🎯 X1 Blockchain integration
 
-In the project directory, you can run:
+## Commands
 
-### `npm start`
+Available commands in the terminal:
 
-Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- `info` - Token Info & Stats
+- `social` - Social Media Links
+- `buy` - How to Buy $🧛
+- `clear` - Clear Terminal
+- `vampire` - Protocol Status
+- `help` - Show Command Menu
+- `blood` - Blood Moon Protocol
 
-The page will reload when you make changes. You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/emojidrac.git
 
-Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Navigate to project directory
+cd emojidrac
 
-### `npm run build`
+# Install dependencies
+npm install
 
-Builds the app for production to the `build` folder.
+# Start development server
+npm start
+```
 
-It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
+## Technology Stack
+
+- React.js
+- Solana Web3.js
+- CSS3
+- JavaScript ES6+
+
+## Project Structure
+
+```
+emojidrac/
+├── public/
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── services/
+│   │   ├── price.js
+│   │   └── solana.js
+│   ├── App.js
+│   ├── Terminal.css
+│   └── index.js
+└── package.json
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Links
+
+- [Website](https://emojidracula.win)
+- [Telegram](https://t.me/EmojiDracula)
+- [Twitter](https://x.com/emojidracula)
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Solana blockchain
+- X1 Protocol
+- Terminal styling inspiration from classic Unix terminals
+```
